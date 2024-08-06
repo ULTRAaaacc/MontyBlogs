@@ -53,7 +53,7 @@
 ///////////////////////////////////////////
 ///////////////////////////////////////////
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -69,8 +69,16 @@ import Register from "./components/Register";
 import NotFound from "./NotFound";
 import Navbar from "./Navbar";
 import "./index.css";
+import Cookie from "js-cookie";
+
 function App() {
-  const isAuthenticated = !!localStorage.getItem("token");
+  //const isAuthenticated = !!localStorage.getItem("token");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const cookie = Cookie.get("token");
+    setIsAuthenticated(cookie);
+  }, []);
 
   return (
     <Router>
